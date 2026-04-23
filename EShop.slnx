@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="EShop.Client/EShop.Client.csproj" />
+  <Project Path="EShop.DataLayer/EShop.DataLayer.csproj" />
+</Solution>
