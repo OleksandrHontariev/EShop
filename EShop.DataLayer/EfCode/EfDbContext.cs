@@ -12,7 +12,9 @@ namespace EShop.DataLayer.EfCode
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            
+            modelBuilder.Entity<Order>().Ignore(p => p.OrderNumber);
+            modelBuilder.Entity<Product>().ToTable("Products");
+            modelBuilder.Entity<Product>().HasQueryFilter(p => !p.SoftDeleted);
         }
         public DbSet<Product> Products { get; set; }
         public DbSet<PriceOffer> PriceOffers { get; set; }

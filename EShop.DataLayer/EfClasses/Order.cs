@@ -13,6 +13,8 @@ namespace EShop.DataLayer.EfClasses
         public Guid CustomerId { get; set; }
         public ICollection<LineItem> LineItems { get; set; }
 
+        public string OrderNumber => $"SO{Id:D6}";
+
         public Order()
         {
             DateOrderedUtc = DateTime.UtcNow;
