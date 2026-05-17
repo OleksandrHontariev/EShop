@@ -15,6 +15,9 @@ namespace EShop.DataLayer.EfCode
             modelBuilder.Entity<Order>().Ignore(p => p.OrderNumber);
             modelBuilder.Entity<Product>().ToTable("Products");
             modelBuilder.Entity<Product>().HasQueryFilter(p => !p.SoftDeleted);
+            modelBuilder.Entity<Tag>().HasKey(p => p.TagId);
+            modelBuilder.Entity<Tag>().Property(p => p.TagId).IsRequired();
+            modelBuilder.Entity<Tag>().Property(p => p.TagId).HasMaxLength(40);
         }
         public DbSet<Product> Products { get; set; }
         public DbSet<PriceOffer> PriceOffers { get; set; }

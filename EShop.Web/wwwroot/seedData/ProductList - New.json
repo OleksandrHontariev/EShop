@@ -1,0 +1,201 @@
+{
+    "products": [
+      {
+        "name": "Toyota Camry 2022",
+        "description": "Reliable midsize sedan with automatic transmission, fuel-efficient engine, and comfortable interior.",
+        "manufacturer": "Toyota Motor Corporation",
+        "brand": "Toyota",
+        "price": "28999.99",
+        "averageRating": 5,
+        "ratingsCount": 3,
+        "seller_id": 1,
+        "tags": [
+          "Sedan",
+          "Comfort",
+          "Daily Driver",
+          "Japanese"
+        ]
+      },
+      {
+        "name": "BMW X5 2021",
+        "description": "Luxury SUV with all-wheel drive, premium leather interior, and advanced driver assistance systems.",
+        "manufacturer": "BMW Group",
+        "brand": "BMW",
+        "price": "58750",
+        "averageRating": 4.2,
+        "ratingsCount": 4,
+        "seller_id": 1,
+        "tags": [
+          "Luxury",
+          "SUV",
+          "AWD",
+          "Premium"
+        ]
+      },
+      {
+        "name": "Tesla Model 3 Performance",
+        "description": "Electric sports sedan with dual motor AWD, autopilot features, and long-range battery.",
+        "manufacturer": "Tesla, Inc.",
+        "brand": "Tesla",
+        "price": "64990.5",
+        "averageRating": 3.6,
+        "ratingsCount": 8,
+        "seller_id": 2,
+        "tags": [
+          "Electric",
+          "Sports Sedan",
+          "Autopilot",
+          "EV"
+        ]
+      },
+      {
+        "name": "Ford Mustang GT",
+        "description": "Classic American muscle car with V8 engine, aggressive styling, and sport suspension.",
+        "manufacturer": "Ford Motor Company",
+        "brand": "Ford",
+        "price": "45200",
+        "averageRating": 5,
+        "ratingsCount": 2,
+        "seller_id": 2,
+        "tags": [
+          "Muscle Car",
+          "V8",
+          "Sports Car",
+          "American"
+        ]
+      },
+      {
+        "name": "Audi A6 Quattro",
+        "description": "Premium executive sedan featuring quattro all-wheel drive and modern infotainment system.",
+        "manufacturer": "Audi AG",
+        "brand": "Audi",
+        "price": "53999.95",
+        "averageRating": 4.7,
+        "ratingsCount": 3,
+        "seller_id": 3,
+        "tags": [
+          "Executive",
+          "Luxury Sedan",
+          "Quattro",
+          "German Cars"
+        ]
+      },
+      {
+        "name": "Mercedes-Benz C300",
+        "description": "Luxury compact sedan with turbocharged engine, ambient lighting, and digital cockpit.",
+        "manufacturer": "Mercedes-Benz Group AG",
+        "brand": "Mercedes-Benz",
+        "price": "48120",
+        "averageRating": 4.8,
+        "ratingsCount": 3,
+        "seller_id": 3,
+        "tags": [
+          "Luxury",
+          "Compact Sedan",
+          "Turbocharged",
+          "German Cars"
+        ]
+      },
+      {
+        "name": "Honda Civic Touring",
+        "description": "Compact sedan with modern safety features, excellent fuel economy, and sporty handling.",
+        "manufacturer": "Honda Motor Co., Ltd.",
+        "brand": "Honda",
+        "price": "27450.75",
+        "averageRating": 4.6,
+        "ratingsCount": 3,
+        "seller_id": 4,
+        "tags": [
+          "Daily Driver",
+          "Sporty",
+          "Economy",
+          "Family Car"
+        ]
+      },
+      {
+        "name": "Porsche Cayenne",
+        "description": "High-performance luxury SUV with powerful engine options and premium interior materials.",
+        "manufacturer": "Dr. Ing. h.c. F. Porsche AG",
+        "brand": "Porsche",
+        "price": "89999.99",
+        "averageRating": 4.9,
+        "ratingsCount": 3,
+        "seller_id": 4,
+        "tags": [
+          "Luxury SUV",
+          "Performance",
+          "Premium",
+          "German Cars"
+        ]
+      },
+      {
+        "name": "Hyundai Tucson Hybrid",
+        "description": "Hybrid crossover SUV with advanced technology, spacious cabin, and low fuel consumption.",
+        "manufacturer": "Hyundai Motor Company",
+        "brand": "Hyundai",
+        "price": "34990",
+        "averageRating": 3.1,
+        "ratingsCount": 3,
+        "seller_id": 5,
+        "tags": [
+          "Hybrid",
+          "Crossover",
+          "Eco Friendly",
+          "SUV"
+        ]
+      },
+      {
+        "name": "Chevrolet Silverado 1500",
+        "description": "Full-size pickup truck designed for heavy-duty work, towing, and off-road capability.",
+        "manufacturer": "General Motors",
+        "brand": "Chevrolet",
+        "price": "51999.49",
+        "averageRating": 5,
+        "ratingsCount": 3,
+        "seller_id": 5,
+        "tags": [
+          "Pickup Truck",
+          "Off-Road",
+          "Towing",
+          "American"
+        ]
+      }
+],
+  "sellers": [
+    {
+      "id": 1,
+      "first_name": "John",
+      "last_name": "Anderson",
+      "phone": "+1-202-555-0147",
+      "email": "john.anderson@autohub.com"
+    },
+    {
+      "id": 2,
+      "first_name": "Emily",
+      "last_name": "Carter",
+      "phone": "+1-202-555-0183",
+      "email": "emily.carter@premiumcars.com"
+    },
+    {
+      "id": 3,
+      "first_name": "Michael",
+      "last_name": "Turner",
+      "phone": "+1-202-555-0119",
+      "email": "michael.turner@driveworld.com"
+    },
+    {
+      "id": 4,
+      "first_name": "Sophia",
+      "last_name": "Mitchell",
+      "phone": "+1-202-555-0165",
+      "email": "sophia.mitchell@eliteautos.com"
+    },
+    {
+      "id": 5,
+      "first_name": "Daniel",
+      "last_name": "Roberts",
+      "phone": "+1-202-555-0198",
+      "email": "daniel.roberts@luxurygarage.com"
+    }
+  ]
+}

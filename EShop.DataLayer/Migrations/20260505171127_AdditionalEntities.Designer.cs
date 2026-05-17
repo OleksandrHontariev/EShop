@@ -4,6 +4,7 @@ using EShop.DataLayer.EfCode;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EShop.DataLayer.Migrations
 {
     [DbContext(typeof(EfDbContext))]
-    partial class EfDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260505171127_AdditionalEntities")]
+    partial class AdditionalEntities
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,20 +32,23 @@ namespace EShop.DataLayer.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<int>("BookId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("BookPrice")
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<byte>("LineNum")
                         .HasColumnType("tinyint");
 
-                    b.Property<short>("NumProducts")
+                    b.Property<short>("NumBooks")
                         .HasColumnType("smallint");
 
                     b.Property<int>("OrderId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ProductId")
+                    b.Property<int?>("ProductId")
                         .HasColumnType("int");
-
-                    b.Property<decimal>("ProductPrice")
-                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
 
@@ -121,15 +126,18 @@ namespace EShop.DataLayer.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("SellerId")
+                    b.Property<int>("Seller")
                         .HasColumnType("int");
 
                     b.Property<bool>("SoftDeleted")
                         .HasColumnType("bit");
 
+                    b.Property<string>("TagId")
+                        .HasColumnType("nvarchar(40)");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("SellerId");
+                    b.HasIndex("TagId");
 
                     b.ToTable("Products", (string)null);
                 });
@@ -161,31 +169,6 @@ namespace EShop.DataLayer.Migrations
                     b.ToTable("Review");
                 });
 
-            modelBuilder.Entity("EShop.DataLayer.EfClasses.Seller", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FirstName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LastName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Phone")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Seller");
-                });
-
             modelBuilder.Entity("EShop.DataLayer.EfClasses.Tag", b =>
                 {
                     b.Property<string>("TagId")
@@ -195,21 +178,6 @@ namespace EShop.DataLayer.Migrations
                     b.HasKey("TagId");
 
                     b.ToTable("Tag");
-                });
-
-            modelBuilder.Entity("ProductTag", b =>
-                {
-                    b.Property<int>("ProductsId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("TagsTagId")
-                        .HasColumnType("nvarchar(40)");
-
-                    b.HasKey("ProductsId", "TagsTagId");
-
-                    b.HasIndex("TagsTagId");
-
-                    b.ToTable("ProductTag");
                 });
 
             modelBuilder.Entity("EShop.DataLayer.EfClasses.LineItem", b =>
@@ -222,9 +190,7 @@ namespace EShop.DataLayer.Migrations
 
                     b.HasOne("EShop.DataLayer.EfClasses.Product", "Product")
                         .WithMany()
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ProductId");
 
                     b.Navigation("Product");
                 });
@@ -232,7 +198,7 @@ namespace EShop.DataLayer.Migrations
             modelBuilder.Entity("EShop.DataLayer.EfClasses.PriceOffer", b =>
                 {
                     b.HasOne("EShop.DataLayer.EfClasses.Product", null)
-                        .WithOne("Promition")
+                        .WithOne("Promotion")
                         .HasForeignKey("EShop.DataLayer.EfClasses.PriceOffer", "ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -240,13 +206,9 @@ namespace EShop.DataLayer.Migrations
 
             modelBuilder.Entity("EShop.DataLayer.EfClasses.Product", b =>
                 {
-                    b.HasOne("EShop.DataLayer.EfClasses.Seller", "Seller")
+                    b.HasOne("EShop.DataLayer.EfClasses.Tag", null)
                         .WithMany("Products")
-                        .HasForeignKey("SellerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Seller");
+                        .HasForeignKey("TagId");
                 });
 
             modelBuilder.Entity("EShop.DataLayer.EfClasses.Review", b =>
@@ -258,21 +220,6 @@ namespace EShop.DataLayer.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("ProductTag", b =>
-                {
-                    b.HasOne("EShop.DataLayer.EfClasses.Product", null)
-                        .WithMany()
-                        .HasForeignKey("ProductsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("EShop.DataLayer.EfClasses.Tag", null)
-                        .WithMany()
-                        .HasForeignKey("TagsTagId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("EShop.DataLayer.EfClasses.Order", b =>
                 {
                     b.Navigation("LineItems");
@@ -280,12 +227,12 @@ namespace EShop.DataLayer.Migrations
 
             modelBuilder.Entity("EShop.DataLayer.EfClasses.Product", b =>
                 {
-                    b.Navigation("Promition");
+                    b.Navigation("Promotion");
 
                     b.Navigation("Reviews");
                 });
 
-            modelBuilder.Entity("EShop.DataLayer.EfClasses.Seller", b =>
+            modelBuilder.Entity("EShop.DataLayer.EfClasses.Tag", b =>
                 {
                     b.Navigation("Products");
                 });

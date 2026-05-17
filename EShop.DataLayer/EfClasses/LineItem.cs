@@ -10,10 +10,10 @@ namespace EShop.DataLayer.EfClasses
     {
         public int Id { get; set; }
         public byte LineNum { get; set; }
-        public short NumBooks { get; set; }
-        public decimal BookPrice { get; set; }
+        public short NumProducts { get; set; }
+        public decimal ProductPrice { get; set; }
         public int OrderId { get; set; }
-        public int BookId { get; set; }
+        public int ProductId { get; set; }
 
         // relationships
 

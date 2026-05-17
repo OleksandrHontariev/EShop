@@ -1,5 +1,5 @@
 <Solution>
-  <Project Path="EShop.Client/EShop.Client.csproj" />
   <Project Path="EShop.DataLayer/EShop.DataLayer.csproj" />
+  <Project Path="EShop.ServiceLayer/EShop.ServiceLayer.csproj" Id="6c26a16b-bcd5-4725-aa1f-f49f3db1421c" />
   <Project Path="EShop.Web/EShop.Web.csproj" />
 </Solution>

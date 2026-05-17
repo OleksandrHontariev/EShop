@@ -4,6 +4,7 @@ using EShop.DataLayer.EfCode;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EShop.DataLayer.Migrations
 {
     [DbContext(typeof(EfDbContext))]
-    partial class EfDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260517125957_ChangeRelationshipsToManyBetweenProductSeller")]
+    partial class ChangeRelationshipsToManyBetweenProductSeller
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -129,8 +131,6 @@ namespace EShop.DataLayer.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("SellerId");
-
                     b.ToTable("Products", (string)null);
                 });
 
@@ -197,6 +197,21 @@ namespace EShop.DataLayer.Migrations
                     b.ToTable("Tag");
                 });
 
+            modelBuilder.Entity("ProductSeller", b =>
+                {
+                    b.Property<int>("ProductsId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SellersId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ProductsId", "SellersId");
+
+                    b.HasIndex("SellersId");
+
+                    b.ToTable("ProductSeller");
+                });
+
             modelBuilder.Entity("ProductTag", b =>
                 {
                     b.Property<int>("ProductsId")
@@ -238,22 +253,26 @@ namespace EShop.DataLayer.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("EShop.DataLayer.EfClasses.Product", b =>
-                {
-                    b.HasOne("EShop.DataLayer.EfClasses.Seller", "Seller")
-                        .WithMany("Products")
-                        .HasForeignKey("SellerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Seller");
-                });
-
             modelBuilder.Entity("EShop.DataLayer.EfClasses.Review", b =>
                 {
                     b.HasOne("EShop.DataLayer.EfClasses.Product", null)
                         .WithMany("Reviews")
                         .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("ProductSeller", b =>
+                {
+                    b.HasOne("EShop.DataLayer.EfClasses.Product", null)
+                        .WithMany()
+                        .HasForeignKey("ProductsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("EShop.DataLayer.EfClasses.Seller", null)
+                        .WithMany()
+                        .HasForeignKey("SellersId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -283,11 +302,6 @@ namespace EShop.DataLayer.Migrations
                     b.Navigation("Promition");
 
                     b.Navigation("Reviews");
-                });
-
-            modelBuilder.Entity("EShop.DataLayer.EfClasses.Seller", b =>
-                {
-                    b.Navigation("Products");
                 });
 #pragma warning restore 612, 618
         }

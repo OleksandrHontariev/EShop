@@ -4,6 +4,7 @@ using EShop.DataLayer.EfCode;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EShop.DataLayer.Migrations
 {
     [DbContext(typeof(EfDbContext))]
-    partial class EfDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260517110514_ChangedNameOfSellerTableToSellers")]
+    partial class ChangedNameOfSellerTableToSellers
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -240,13 +242,13 @@ namespace EShop.DataLayer.Migrations
 
             modelBuilder.Entity("EShop.DataLayer.EfClasses.Product", b =>
                 {
-                    b.HasOne("EShop.DataLayer.EfClasses.Seller", "Seller")
+                    b.HasOne("EShop.DataLayer.EfClasses.Seller", "Sellers")
                         .WithMany("Products")
                         .HasForeignKey("SellerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Seller");
+                    b.Navigation("Sellers");
                 });
 
             modelBuilder.Entity("EShop.DataLayer.EfClasses.Review", b =>
