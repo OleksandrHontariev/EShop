@@ -21,6 +21,6 @@ namespace EShop.DataLayer.EfClasses
         public ICollection<Review> Reviews { get; set; }
         public Seller Seller { get; set; }
         public ICollection<Tag> Tags { get; set; }
-        public PriceOffer Promition { get; set; }
+        public PriceOffer Promotion { get; set; }
     }
 }

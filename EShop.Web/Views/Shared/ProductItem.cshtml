@@ -1,0 +1,23 @@
+﻿@model EShop.ServiceLayer.ProductServices.ProductListDto
+
+<td>
+    <h3>@Html.DisplayFor(modelItem => Model.Title)</h3>
+    <div>
+        <small>by</small>&nbsp;@Html.DisplayFor(modelItem => Model.SellerName)
+    </div>
+    <div>
+        Categories: <i>@string.Join(", ", Model.TagStrings)</i>
+    </div>
+    <div>
+        @(Model.ReviewsCount == 0 ? "Be the first to review this product" : $"Votes: {Model.ReviewsAverageVotes:F1} by {Model.ReviewsCount} customers")
+    </div>
+    <div>
+        <span class="h4">@(Model.ActualPrice < 0 ? "- not for sale - " : $"Price: ${Model.ActualPrice:F}")</span>
+        @if (Model.PromotionPromotionalText != null)
+        {
+            <span class="text-danger">
+                <strong>$nbsp;<del>$@($"{Model.Price:F}")</del>&nbsp;<i>@(Model.PromotionPromotionalText)</i></strong>
+            </span>
+        }
+    </div>
+</td>

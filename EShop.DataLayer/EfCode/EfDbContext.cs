@@ -22,5 +22,6 @@ namespace EShop.DataLayer.EfCode
         public DbSet<Product> Products { get; set; }
         public DbSet<PriceOffer> PriceOffers { get; set; }
         public DbSet<Order> Orders { get; set; }
+        public DbSet<Tag> Tag { get; set; }
     }
 }

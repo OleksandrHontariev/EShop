@@ -1,16 +1,83 @@
-﻿<!DOCTYPE html>
-<html>
-    <head>
-        <meta name="viewport" content="utf-8" />
-        <link rel="stylesheet" href="~/bootstrap/css/bootstrap.min.css" />
-    </head>
-    <body>
-    <section class="bg-primary text-white text-center py-5">
-        <div class="container">
-            <h1 class="display-4">Главный баннер</h1>
-            <p class="lead">Краткое описание или слоган</p>
-            <a href="#" class="btn btn-light btn-lg">Подробнее</a>
-        </div>
-    </section>
-    </body>
-</html>
+﻿@model EShop.ServiceLayer.ProductServices.ProductListCombinedDto
+
+<div class="container py-3">
+        <form id="sort-filter-form" role="form" class="row g-3 align-items-end">
+            <!-- Sort By -->
+            <div class="col-12 col-md-3">
+                <label class="form-label">Sort By</label>
+                <select asp-for="SortFilterPageData.OrderByOptions"
+                    name="OrderByOptions"
+                        asp-items="Html.GetEnumSelectList<EShop.ServiceLayer.ProductServices.QueryObjects.OrderByOptions>()" class="form-select"
+                        onchange="ProductList.sendForm(this)">
+                </select>
+            </div>
+
+            <!-- Filter Type -->
+            <div class="col-12 col-md-3">
+                <label class="form-label">Filter Type</label>
+                <select asp-for="SortFilterPageData.FilterBy"
+                        name="FilterBy"
+                        asp-items="Html.GetEnumSelectList<EShop.ServiceLayer.ProductServices.QueryObjects.ProductsFilterBy>()" class="form-select"
+                        onchange="ProductList.filterByHasChanged(this)">
+                </select>
+            </div>
+
+            <!-- Filter By (disabled until type selected) -->
+            <div class="col-12 col-md-3">
+                <label class="form-label">Filter By</label>
+                <select id="filter-value-dropdown" class="form-select" disabled
+                        name="FilterValue"
+                        asp-for="SortFilterPageData.FilterValue"
+                        onchange="ProductList.sendForm(this)">
+                        <option>Select filter type...</option>
+                </select>
+            </div>
+
+            <!-- Page -->
+            <div class="col-6 col-md-1">
+                <label class="form-label">Page</label>
+                <input asp-for="SortFilterPageData.PageNum" class="form-control"
+                       min="1"
+                       name="PageNum"
+                       onchange="ProductList.sendForm(this)">
+            </div>
+
+            <div class="col-6 col-md-1 d-flex align-items-end">
+                <div class="mb-2 text-muted">of @Model.SortFilterPageData.NumPages</div>
+            </div>
+
+            <!-- Page Size -->
+            <div class="col-12 col-md-1">
+                <label class="form-label">Page Size</label>
+                <select asp-for="SortFilterPageData.PageSize"
+                        name="PageSize"
+                        asp-items="Model.SortFilterPageData.PageSizes.Select(x => new SelectListItem { Text = x.ToString(), Value = x.ToString() })"
+                        class="form-select"
+                        onchange="ProductList.sendForm(this)">
+                </select>
+            </div>
+
+            <input id="PrevCheckState" name="PrevCheckState" type="hidden" value="@Model.SortFilterPageData.PrevCheckState" />
+        </form>
+        <br/>
+
+        <table class="table">
+        @foreach (var product in Model.ProductList)
+        {
+            <tr>                
+                <partial name="ProductItem" model="product" />
+            </tr>
+        }
+        </table>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener("DOMContentLoaded", function (event) {
+            ProductList.initialize(
+                '@Model.SortFilterPageData.FilterBy',
+                '@Model.SortFilterPageData.FilterValue',
+                '@Url.Action("GetFilterSearchContent")');
+        });
+    </script>
+}

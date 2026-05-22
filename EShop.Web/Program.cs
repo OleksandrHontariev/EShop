@@ -5,7 +5,8 @@ using EShop.Web.HelperExtensions;
 var builder = WebApplication.CreateBuilder(args);
 
 string connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
+
 builder.Services.AddDbContext<EfDbContext>(options => options.UseSqlServer(connectionString));
 
 var app = builder.Build();
